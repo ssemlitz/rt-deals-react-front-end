@@ -15,7 +15,7 @@ const App = () => {
   const [user, setUser] = useState(authService.getUser())
   const navigate = useNavigate()
 
-  const handleAddDeal = newDealData => {
+  const handleAddDeal = async newDealData => {
     const newDeal = await dealService.create(newDealData)
     setDeals([...deals], newDeal)
   }
