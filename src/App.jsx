@@ -7,10 +7,18 @@ import Landing from './pages/Landing/Landing'
 import Profiles from './pages/Profiles/Profiles'
 import ChangePassword from './pages/ChangePassword/ChangePassword'
 import * as authService from './services/authService'
+import * as dealService from './services/dealService'
+import AddDeal from './pages/AddDeal/AddDeal'
 
 const App = () => {
+  const [deals, setDeals] = useState([])
   const [user, setUser] = useState(authService.getUser())
   const navigate = useNavigate()
+
+  const handleAddDeal = newDealData => {
+    const newDeal = await dealService.create(newDealData)
+    setDeals([...deals], newDeal)
+  }
 
   const handleLogout = () => {
     authService.logout()
@@ -27,6 +35,10 @@ const App = () => {
       <NavBar user={user} handleLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<Landing user={user} />} />
+        <Route
+          path="/add"
+          element={<AddDeal handleAddDeal={handleAddDeal}/>}
+        />
         <Route
           path="/signup"
           element={<Signup handleSignupOrLogin={handleSignupOrLogin} />}
