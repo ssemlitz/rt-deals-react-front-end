@@ -17,6 +17,13 @@ function DealCard({ deal, randDogImgId, handleDeleteDeal, user }) {
       </div>
       {user?.profile === deal.owner._id && (
         <div className="card-footer">
+          <Link 
+            className="btn btn-sm btn-warning" 
+            to="/edit" 
+            state={{ deal }}
+          >
+            Edit
+          </Link>
           <button
             className="btn btn-sm btn-danger m-left"
             onClick={() => handleDeleteDeal(deal._id)}
