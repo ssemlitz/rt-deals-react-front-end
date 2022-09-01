@@ -28,6 +28,11 @@ const App = () => {
     setDeals([...deals], newDeal)
   }
 
+  const handleDeleteDeal = async id => {
+    const deletedDeal = await dealService.deleteOne(id)
+    setDeals(deals.filter(deal => deal._id !== deletedDeal._id))
+  }
+
   const handleLogout = () => {
     authService.logout()
     setUser(null)
@@ -44,7 +49,7 @@ const App = () => {
       <Routes>
         <Route 
           path="/" 
-          element={<DealList deals={deals} />} />
+          element={<DealList deals={deals} handleDeleteDeal={handleDeleteDeal} user={user}/>} />
         <Route
           path="/add"
           element={<AddDeal handleAddDeal={handleAddDeal}/>}

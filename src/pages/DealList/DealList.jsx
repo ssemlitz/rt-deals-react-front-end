@@ -1,18 +1,21 @@
 import styles from './DealList.module.css'
+import DealCard from '../../components/DealCard/DealCard'
 
 function DealList(props) {
+  const dogIds = [1025,1012,1062,1084,169,200,219,237,244,275,40,433,577,582,593,611,659,718,783,790,824,837,881,937,943]
+  
   return (
     <>
       <h1>Deal List</h1>
       <div className={styles.container}>
         {props.deals.map(deal => 
-          <div key={deal._id}>
-            <p>Deal Title: {deal.title}</p>
-            <p>Original Price: {deal.origPrice}</p>
-            <p>Sale Price: {deal.salePrice}</p>
-            <p>Deal URL: {deal.dealLink}</p>
-            <p>Details: {deal.details}</p>
-          </div>
+          <DealCard 
+            key={deal._id} 
+            deal={deal}
+            randDogImgId={dogIds[Math.floor(Math.random()*(dogIds.length))]}
+            handleDeleteDeal={props.handleDeleteDeal}
+            user={props.user}
+            />
         )}
       </div>
     </>
