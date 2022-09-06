@@ -28,8 +28,27 @@ async function deleteOne(id) {
   return res.json()
 }
 
+async function update(deal) {
+  const res = await fetch(`${BASE_URL}/${deal._id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${tokenService.getToken()}`
+    },
+    body: JSON.stringify(deal)
+  })
+  return res.json()
+}
+
+async function show(deal) {
+  const res = await fetch(`${BASE_URL}/${deal._id}`)
+  return res.json()
+}
+
 export {
 	create,
   getAll,
-  deleteOne
+  deleteOne,
+  update,
+  show
 }

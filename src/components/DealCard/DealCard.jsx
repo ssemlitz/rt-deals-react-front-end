@@ -18,7 +18,14 @@ function DealCard({ deal, randDogImgId, handleDeleteDeal, user }) {
       {user?.profile === deal.owner._id && (
         <div className="card-footer">
           <Link 
-            className="btn btn-sm btn-warning" 
+            className="btn btn-sm btn-secondary" 
+            to="/details" 
+            state={{ deal }}
+          >
+            Details
+          </Link>
+          <Link 
+            className="btn btn-sm btn-warning m-left" 
             to="/edit" 
             state={{ deal }}
           >

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react"
 import { Link, useLocation } from 'react-router-dom'
 
-function EditDeal(props) {
+function Details({ deal, randDogImgId, handleDeleteDeal, user }) {
 	const location = useLocation()
   
   const [formData, setFormData] = useState(location.state.deal)
@@ -10,13 +10,13 @@ function EditDeal(props) {
   
   const [validForm, setValidForm] = useState(true)
   
-  const handleChange = evt => {
+  const handleSave = evt => {
 		setFormData({ ...formData, [evt.target.name]: evt.target.value })
 	}
 
   const handleSubmit = evt => {
 		evt.preventDefault()
-    props.handleUpdateDeal(formData)
+    // handleUpdateDeal(formData)
 	}
 
   useEffect(() => {
@@ -25,77 +25,32 @@ function EditDeal(props) {
 
   return (
 		<>
-			<h1>Edit Deal</h1>
+			<h1>Details!</h1>
 			<form autoComplete="off" ref={formElement} onSubmit={handleSubmit}>
 				<div className="form-group mb-3">
 					<label htmlFor="name-input" className="form-label">
-						Item Name (required)
+						Item Name: {formData.title}
 					</label>
-					<input 
-						type="text"
-						className="form-control"
-						id="title-input"
-						name="title"
-            value={formData.title}
-            onChange={handleChange}
-						required
-					/>
 				</div>
 				<div className="form-group mb-3">
 					<label htmlFor="breed-input" className="form-label">
-						Original Price (required)
+						Original Price: $ {formData.origPrice}
 					</label>
-					<input 
-						type="number"
-						className="form-control"
-						id="origPrice-input"
-						name="origPrice"
-            value={formData.origPrice}
-            onChange={handleChange}
-						required
-					/>
 				</div>
 				<div className="form-group mb-4">
 					<label htmlFor="age-input" className="form-label">
-						Sale Price
+						Sale Price: $ {formData.salePrice}
 					</label>
-					<input 
-						type="number"
-						className="form-control"
-						id="salePrice-input"
-						name="salePrice"
-            value={formData.salePrice}
-            onChange={handleChange}
-            required
-					/>
 				</div>
 				<div className="form-group mb-5">
 					<label htmlFor="age-input" className="form-label">
-						Deal Link (URL)
+						See Deal Here: <a target="_blank" rel="noreferrer" href={formData.dealLink}>DEAL LINK</a>
 					</label>
-					<input 
-						type="url"
-						className="form-control"
-						id="dealLink-input"
-						name="dealLink"
-            value={formData.dealLink}
-            onChange={handleChange}
-            required
-					/>
 				</div>
 				<div className="form-group mb-6">
 					<label htmlFor="age-input" className="form-label">
-						Details
+						Details: {formData.details}
 					</label>
-					<input 
-						type="text"
-						className="form-control"
-						id="details-input"
-						name="details"
-            value={formData.details}
-            onChange={handleChange}
-            required
-					/>
 				</div>
 				<div className="d-grid">
 					<button
@@ -115,8 +70,25 @@ function EditDeal(props) {
 					</Link>
 				</div>
 			</form>
+			{/* {user?.profile === deal.owner._id && ( */}
+        <div className="card-footer">
+          <Link 
+            className="btn btn-sm btn-warning m-left" 
+            to="/edit" 
+            state={{ deal }}
+          >
+            Edit
+          </Link>
+          <button
+            className="btn btn-sm btn-danger m-left"
+            onClick={() => handleDeleteDeal(deal._id)}
+          >
+            Delete
+          </button>
+        </div>
+      {/* )} */}
 		</>
 	)
 }
 
-export default EditDeal
+export default Details

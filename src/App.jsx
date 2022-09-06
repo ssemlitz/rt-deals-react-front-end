@@ -10,6 +10,7 @@ import * as dealService from "./services/dealService";
 import AddDeal from "./pages/AddDeal/AddDeal";
 import DealList from "./pages/DealList/DealList";
 import EditDeal from "./pages/EditDeal/EditDeal";
+import Details from "./pages/Details/Details"
 
 const App = () => {
   const [deals, setDeals] = useState([]);
@@ -33,6 +34,15 @@ const App = () => {
     const deletedDeal = await dealService.deleteOne(id);
     setDeals(deals.filter((deal) => deal._id !== deletedDeal._id));
   };
+
+  const handleUpdateDeal = async updatedDealData => {
+    const updatedDeal = await dealService.update(updatedDealData)
+    const newDealsArray = deals.map(deal => 
+      deal._id === updatedDeal._id ? updatedDeal : deal 
+    )
+    setDeals(newDealsArray)
+    navigate('/')
+  }
 
   const handleLogout = () => {
     authService.logout();
@@ -59,12 +69,16 @@ const App = () => {
           }
         />
         <Route
+          path="/details"
+          element={<Details deals={deals} user={user} handleDeleteDeal={handleDeleteDeal}/>}
+        />
+        <Route
           path="/add"
           element={<AddDeal handleAddDeal={handleAddDeal} />}
         />
         <Route 
           path="/edit" 
-          element={<EditDeal />} 
+          element={<EditDeal handleUpdateDeal={handleUpdateDeal}/>} 
         />
         <Route
           path="/signup"
