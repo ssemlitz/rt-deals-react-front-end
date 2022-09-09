@@ -8,10 +8,13 @@ function Details({ deal, randDogImgId, handleDeleteDeal, user }) {
 
   const formElement = useRef()
   
-  const [validForm, setValidForm] = useState(true)
   
-  const handleSave = evt => {
+  const handleChange = evt => {
 		setFormData({ ...formData, [evt.target.name]: evt.target.value })
+	}
+
+	const handleSave = evt => {
+		
 	}
 
   const handleSubmit = evt => {
@@ -19,9 +22,9 @@ function Details({ deal, randDogImgId, handleDeleteDeal, user }) {
     // handleUpdateDeal(formData)
 	}
 
-  useEffect(() => {
-    formElement.current.checkValidity() ? setValidForm(true) : setValidForm(false)
-  }, [formData])
+  // useEffect(() => {
+  //   formElement.current.checkValidity() ? setValidForm(true) : setValidForm(false)
+  // }, [formData])
 
   return (
 		<>
@@ -56,21 +59,12 @@ function Details({ deal, randDogImgId, handleDeleteDeal, user }) {
 					<button
 						type="submit"
 						className="btn btn-primary btn-fluid"
-            disabled={!validForm}
 					>
 						Save Deal
 					</button>
 				</div>
-        <div className="d-grid">
-					<Link
-						to="/"
-						className="btn btn-danger btn-fluid"
-					>
-						Cancel
-					</Link>
-				</div>
 			</form>
-			{/* {user?.profile === deal.owner._id && ( */}
+			{user?.profile === deal.owner._id && (
         <div className="card-footer">
           <Link 
             className="btn btn-sm btn-warning m-left" 
@@ -86,7 +80,16 @@ function Details({ deal, randDogImgId, handleDeleteDeal, user }) {
             Delete
           </button>
         </div>
-      {/* )} */}
+      )}
+			:
+			<div className="d-grid">
+					<Link
+						to="/"
+						className="btn btn-danger btn-fluid"
+					>
+						Cancel
+					</Link>
+				</div>
 		</>
 	)
 }

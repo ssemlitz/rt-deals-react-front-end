@@ -14,6 +14,13 @@ function DealCard({ deal, randDogImgId, handleDeleteDeal, user }) {
         <p className="card-text">Sale Price: {deal.salePrice}</p>
         <p className="card-text">Deal Link: {deal.dealLink}</p>
         <p className="card-text">Details: {deal.details}</p>
+      <Link 
+            className="btn btn-sm btn-secondary" 
+            to="/details" 
+            state={{ deal }}
+          >
+            Details
+          </Link>
       </div>
       {user?.profile === deal.owner._id && (
         <div className="card-footer">
