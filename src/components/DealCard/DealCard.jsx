@@ -22,7 +22,7 @@ function DealCard({ deal, randDogImgId, handleDeleteDeal, user }) {
             Details
           </Link>
       </div>
-      {user?.profile === deal.owner._id && (
+      {/* {user?.profile === deal.owner._id && ( */}
         <div className="card-footer">
           <Link 
             className="btn btn-sm btn-secondary" 
@@ -45,7 +45,7 @@ function DealCard({ deal, randDogImgId, handleDeleteDeal, user }) {
             Delete
           </button>
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 }

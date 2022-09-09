@@ -44,6 +44,10 @@ const App = () => {
     navigate('/')
   }
 
+  const handleSaveDeal = evt => {
+		evt.preventDefault()
+	}
+
   const handleLogout = () => {
     authService.logout();
     setUser(null);
@@ -70,7 +74,11 @@ const App = () => {
         />
         <Route
           path="/details"
-          element={<Details deals={deals} user={user} handleDeleteDeal={handleDeleteDeal}/>}
+          element={<Details 
+            deals={deals} 
+            user={user} 
+            handleDeleteDeal={handleDeleteDeal}
+          />}
         />
         <Route
           path="/add"
