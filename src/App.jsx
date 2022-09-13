@@ -44,10 +44,18 @@ const App = () => {
     navigate('/')
   }
 
-  const handleSaveDeal = evt => {
+  const handleSaveDeal = async evt => {
 		evt.preventDefault()
+    const deal = {
+      title: this.title,
+      origPrice: this.origPrice,
+      salePrice: this.salePrice,
+      dealLink: this.dealLink,
+      details: this.details,
+      owner: this.owner
+    }
+    await dealService.saveDeal(deal)
 	}
-  //handles deal saves and appends to savedDeals in profile
 
   const handleLogout = () => {
     authService.logout();
@@ -69,6 +77,7 @@ const App = () => {
             <DealList
               deals={deals}
               handleDeleteDeal={handleDeleteDeal}
+              handleSaveDeal={handleSaveDeal}
               user={user}
             />
           }
@@ -79,6 +88,7 @@ const App = () => {
             deals={deals} 
             user={user} 
             handleDeleteDeal={handleDeleteDeal}
+            handleSaveDeal={handleSaveDeal}
           />}
         />
         <Route

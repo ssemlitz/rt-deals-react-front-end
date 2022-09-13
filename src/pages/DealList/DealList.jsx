@@ -14,6 +14,7 @@ const DealList = (props) => {
             key={deal._id} 
             randDogImgId={dogIds[Math.floor(Math.random()*(dogIds.length))]}
             handleDeleteDeal={props.handleDeleteDeal}
+            handleSaveDeal={props.handleSaveDeal}
             user={props.user}
             owner={deal.owner}
           />

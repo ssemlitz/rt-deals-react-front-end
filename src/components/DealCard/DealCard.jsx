@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function DealCard({ deal, randDogImgId, handleDeleteDeal, user }) {
+function DealCard({ deal, randDogImgId, handleDeleteDeal, handleSaveDeal, user }) {
   return (
     <div className="card">
       <img
@@ -43,6 +43,12 @@ function DealCard({ deal, randDogImgId, handleDeleteDeal, user }) {
             onClick={() => handleDeleteDeal(deal._id)}
           >
             Delete
+          </button>
+          <button
+            className="btn btn-sm btn-danger m-left"
+            onClick={() => handleSaveDeal(deal._id)}
+          >
+            Save
           </button>
         </div>
       {/* )} */}

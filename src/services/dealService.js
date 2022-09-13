@@ -45,10 +45,20 @@ async function show(deal) {
   return res.json()
 }
 
+async function saveDeal(deal) {
+  const res = await fetch(BASE_URL, {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${tokenService.getToken()}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(deal)
+  })
+  return await res.json()
+}
+
 export {
 	create,
   getAll,
   deleteOne,
   update,
-  show
+  show,
+  saveDeal
 }
