@@ -47,6 +47,7 @@ const App = () => {
   const handleSaveDeal = evt => {
 		evt.preventDefault()
 	}
+  //handles deal saves and appends to savedDeals in profile
 
   const handleLogout = () => {
     authService.logout();
